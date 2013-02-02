@@ -50,3 +50,20 @@ Example:
     2001/resolutions.html http://en.wikipedia.org/wiki/Resolution
 
 Note that regular expressions and wildcards are not allowed.
+
+# Amazon Credentials
+
+The script reads your Amazon credentials from a file; `~/.awssecret` by default.
+The first line should be your access key and the second should be your
+secret key.
+
+# Using s3redirect with another sync tool
+
+This script will only add and remove redirects, so it is safe to use alongside
+another sync tool. If the other sync tool deletes files from the bucket that
+have been removed from the local disk, the redirects may be deleted each time
+the other sync tool is used.
+
+One workaround is to create an empty file in the position of each redirect.
+Under most circumstances, this will prevent other tools from deleting the
+redirects that s3redirect creates.
