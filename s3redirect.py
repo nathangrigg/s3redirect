@@ -10,6 +10,31 @@ import argparse
 from boto.s3.connection import S3Connection
 from boto.exception import S3ResponseError
 
+
+def set_public_redirect(key, redirect_location):
+    """Configure this key to redirect to another location.
+
+    When the bucket associated with this key is accessed from the website
+    endpoint, a 301 redirect will be issued to the specified
+    `redirect_location`.
+
+    :type redirect_location: string
+    :param redirect_location: The location to redirect.
+
+    (originally from boto)
+    """
+    headers = {'x-amz-website-redirect-location': redirect_location,
+               'x-amz-acl': 'public-read',
+              }
+    response = key.bucket.connection.make_request('PUT', key.bucket.name,
+                                                   key.name, headers)
+    if response.status == 200:
+        return True
+    else:
+        raise key.provider.storage_response_error(
+            response.status, response.reason, response.read())
+
+
 def clean_key_name(key_name, remove_slash=True, index="index.html"):
     """Remove slash from beginning and append index to end of key"""
     if remove_slash and key_name.startswith("/"):
@@ -59,7 +84,7 @@ def upload_redirects(redirects, bucket, remote_keys, dry=False):
             continue
 
         if not dry:
-            key.set_redirect(location)
+            set_public_redirect(key, location)
         print "{2:<6} {0} {1}".format(
           local_key, location, "update" if exists else "new")
 
