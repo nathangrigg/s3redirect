@@ -21,7 +21,7 @@ setup(
     description = "Synchronize web site redirects with an Amazon S3 bucket",
     author = "Nathan Grigg",
     author_email = "nathan@nathanamy.org",
-    url = "http://github.com/nathan11g/s3redirect/",
+    url = "http://github.com/nathangrigg/s3redirect/",
     py_modules = ["s3redirect"],
     keywords = ["Amazon", "S3", "static site", "redirect"],
     entry_points = {
