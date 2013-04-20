@@ -17,7 +17,7 @@ if sys.version_info >= (3,):
 
 setup(
     name = "s3redirect",
-    version = "0.1.1",
+    version = "0.1.2",
     description = "Synchronize web site redirects with an Amazon S3 bucket",
     author = "Nathan Grigg",
     author_email = "nathan@nathanamy.org",
