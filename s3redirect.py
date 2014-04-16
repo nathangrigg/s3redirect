@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """
 Provides a command line tool to synchronize web site redirects with an
 Amazon S3 bucket.
